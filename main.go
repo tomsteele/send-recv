@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"bytes"
 	"encoding/hex"
 	"flag"
 	"fmt"
@@ -23,6 +22,7 @@ func checkError(err error) {
 
 func send(host string, buff []byte, recvAmt int, timeout time.Duration) (string, error) {
 	conn, err := net.DialTimeout("tcp", host, timeout)
+	var n int
 	if err != nil {
 		return "", err
 	}
@@ -32,12 +32,13 @@ func send(host string, buff []byte, recvAmt int, timeout time.Duration) (string,
 		return "", err
 	}
 	recvbuff := make([]byte, recvAmt)
-	_, err = conn.Read(recvbuff)
+	conn.SetReadDeadline(time.Now().Add(timeout))
+	n, err = conn.Read(recvbuff)
 	if err != nil {
 		return "", err
 	}
 
-	return hex.EncodeToString(bytes.TrimRight(recvbuff, "\x00")), nil
+	return hex.EncodeToString(recvbuff[:n]), nil
 }
 
 func main() {
