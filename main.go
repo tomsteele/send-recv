@@ -42,8 +42,8 @@ func send(host string, buff []byte, recvAmt int, timeout time.Duration) (string,
 }
 
 func main() {
-	inputfile := flag.String("i", "", "Input file containing newline separated list of hosts. Default: stdin.")
-	outfile := flag.String("o", "", "Output file to write the results to. Default: stdout")
+	inputfile := flag.String("i", "", "Input file containing newline separated list of hosts. (default: stdin)")
+	outfile := flag.String("o", "", "Output file to write the results to. (default: stdout)")
 	payload := flag.String("send", "id\n", "Payload to send after connection.")
 	isHex := flag.Bool("hex", false, "Payload provided to -send is hex encoded.")
 	recvAmt := flag.Int("recv", 1024, "How much data to recv before closing the connection.")

@@ -12,9 +12,9 @@ Usage of ./send-recv:
   -hex
       Payload provided to -send is hex encoded.
   -i string
-      Input file containing newline separated list of hosts. Default: stdin.
+      Input file containing newline separated list of hosts. (default: stdin)
   -o string
-      Output file to write the results to. Default: stdout
+      Output file to write the results to. (default: stdout)
   -p int
       Port to connect to.
   -recv int
